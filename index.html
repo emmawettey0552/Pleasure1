@@ -8,6 +8,33 @@
 <style>
 body { margin:0; font-family: Arial, sans-serif; }
 
+/* PRELOADER */
+#preloader {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#7b3f98;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+    color:white;
+}
+
+.loader-text {
+    font-size:28px;
+    font-weight:bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity:0.3; transform:scale(0.95); }
+    50% { opacity:1; transform:scale(1.05); }
+    100% { opacity:0.3; transform:scale(0.95); }
+}
+
+/* HEADER */
 header {
     background:#7b3f98;
     color:white;
@@ -17,7 +44,7 @@ header {
     font-weight:bold;
 }
 
-/* BANNER SLIDER */
+/* BANNER */
 .banner {
     position:relative;
     width:100%;
@@ -25,27 +52,28 @@ header {
     overflow:hidden;
 }
 
+/* IMAGE ZOOM */
 .banner img {
     width:100%;
-    height:300px;
+    height:100%;
     object-fit:cover;
+    animation: zoomBanner 12s ease-in-out infinite alternate;
+}
+
+@keyframes zoomBanner {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* OVERLAY */
+.overlay {
     position:absolute;
-    opacity:0;
-    animation:slideShow 12s infinite;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle, rgba(123,63,152,0.2), rgba(0,0,0,0.6));
 }
 
-.banner img:nth-child(1){ animation-delay:0s; }
-.banner img:nth-child(2){ animation-delay:4s; }
-.banner img:nth-child(3){ animation-delay:8s; }
-
-@keyframes slideShow {
-    0% { opacity:0; }
-    10% { opacity:1; }
-    30% { opacity:1; }
-    40% { opacity:0; }
-    100% { opacity:0; }
-}
-
+/* TEXT */
 .hero-text {
     position:absolute;
     top:50%;
@@ -53,14 +81,31 @@ header {
     transform:translate(-50%, -50%);
     color:white;
     text-align:center;
-    animation:fadeIn 2s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from { opacity:0; transform:translate(-50%, -60%);} 
-    to { opacity:1; transform:translate(-50%, -50%);} 
+.title {
+    font-size:28px;
+    font-weight:bold;
+    animation: slideDown 1.5s ease;
 }
 
+.subtitle {
+    margin-top:10px;
+    font-size:16px;
+    animation: slideUp 2s ease;
+}
+
+@keyframes slideDown {
+    from { opacity:0; transform:translateY(-40px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity:0; transform:translateY(40px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+/* SERVICES */
 .services {
     padding:40px;
     text-align:center;
@@ -79,6 +124,7 @@ header {
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* CONTACT */
 .contact {
     background:#7b3f98;
     color:white;
@@ -86,6 +132,7 @@ header {
     text-align:center;
 }
 
+/* WHATSAPP */
 .whatsapp {
     position:fixed;
     bottom:20px;
@@ -95,26 +142,32 @@ header {
     padding:15px;
     border-radius:50%;
     text-decoration:none;
+    font-size:20px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- PRELOADER -->
+<div id="preloader">
+    <div class="loader-text">Pleasure 1 Aluminum Enterprise</div>
+</div>
+
 <header>Pleasure 1 Aluminum Enterprise</header>
 
 <!-- BANNER -->
 <div class="banner">
-    <img src="IMG-20260425-WA0000.jpg">
-    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
-    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c">
+    <img src="IMG-20260425-WA0000.jpg" alt="Company Banner">
+    <div class="overlay"></div>
 
     <div class="hero-text">
-        <h1>Quality Aluminum Works</h1>
-        <p>Sliding Windows • Doors • Frameless Glass</p>
+        <h1 class="title">Pleasure 1 Aluminum Enterprise</h1>
+        <p class="subtitle">Sliding Windows • Doors • Frameless Glass</p>
     </div>
 </div>
 
+<!-- SERVICES -->
 <section class="services">
     <h2>Our Services</h2>
     <div class="service-list">
@@ -127,6 +180,7 @@ header {
     </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact">
     <h2>Contact Us</h2>
     <p>📞 0599389968 / 0209926962</p>
@@ -135,6 +189,14 @@ header {
 
 <a class="whatsapp" href="https://wa.me/233599389968">💬</a>
 
+<!-- SCRIPT -->
+<script>
+window.addEventListener("load", function(){
+    setTimeout(function(){
+        document.getElementById("preloader").style.display = "none";
+    }, 2500); // 2.5 seconds preloader
+});
+</script>
+
 </body>
-  </html>
-  
+</html>
