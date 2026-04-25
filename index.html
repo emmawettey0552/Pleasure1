@@ -6,9 +6,12 @@
 <title>Pleasure 1 Aluminum Enterprise</title>
 
 <style>
-body { margin:0; font-family: Arial, sans-serif; }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+}
 
-/* PRELOADER */
+/* ================= PRELOADER ================= */
 #preloader {
     position:fixed;
     width:100%;
@@ -20,21 +23,39 @@ body { margin:0; font-family: Arial, sans-serif; }
     flex-direction:column;
     z-index:9999;
     color:white;
+    text-align:center;
+    transition: opacity 0.8s ease;
+}
+
+.loader {
+    width:60px;
+    height:60px;
+    border:6px solid rgba(255,255,255,0.3);
+    border-top:6px solid white;
+    border-radius:50%;
+    animation: spin 1s linear infinite;
+    margin-bottom:20px;
 }
 
 .loader-text {
-    font-size:28px;
+    font-size:26px;
     font-weight:bold;
     animation: pulse 1.5s infinite;
+    max-width:90%;
+}
+
+@keyframes spin {
+    0% { transform:rotate(0deg); }
+    100% { transform:rotate(360deg); }
 }
 
 @keyframes pulse {
-    0% { opacity:0.3; transform:scale(0.95); }
+    0% { opacity:0.4; transform:scale(0.95); }
     50% { opacity:1; transform:scale(1.05); }
-    100% { opacity:0.3; transform:scale(0.95); }
+    100% { opacity:0.4; transform:scale(0.95); }
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header {
     background:#7b3f98;
     color:white;
@@ -44,28 +65,22 @@ header {
     font-weight:bold;
 }
 
-/* BANNER */
+/* ================= BANNER ================= */
 .banner {
     position:relative;
     width:100%;
     height:300px;
     overflow:hidden;
+    background:#7b3f98;
 }
 
-/* IMAGE ZOOM */
 .banner img {
     width:100%;
     height:100%;
-    object-fit:cover;
-    animation: zoomBanner 12s ease-in-out infinite alternate;
+    object-fit:contain;
+    background:#000;
 }
 
-@keyframes zoomBanner {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-/* OVERLAY */
 .overlay {
     position:absolute;
     width:100%;
@@ -73,7 +88,6 @@ header {
     background: radial-gradient(circle, rgba(123,63,152,0.2), rgba(0,0,0,0.6));
 }
 
-/* TEXT */
 .hero-text {
     position:absolute;
     top:50%;
@@ -105,7 +119,7 @@ header {
     to { opacity:1; transform:translateY(0); }
 }
 
-/* SERVICES */
+/* ================= SERVICES ================= */
 .services {
     padding:40px;
     text-align:center;
@@ -124,7 +138,7 @@ header {
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* CONTACT */
+/* ================= CONTACT ================= */
 .contact {
     background:#7b3f98;
     color:white;
@@ -132,7 +146,7 @@ header {
     text-align:center;
 }
 
-/* WHATSAPP */
+/* ================= WHATSAPP ================= */
 .whatsapp {
     position:fixed;
     bottom:20px;
@@ -151,6 +165,7 @@ header {
 
 <!-- PRELOADER -->
 <div id="preloader">
+    <div class="loader"></div>
     <div class="loader-text">Pleasure 1 Aluminum Enterprise</div>
 </div>
 
@@ -187,16 +202,21 @@ header {
     <p>📍 Ofankor Barrier, Pentecost Junction</p>
 </section>
 
+<!-- WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/233599389968">💬</a>
 
-<!-- SCRIPT -->
 <script>
-window.addEventListener("load", function(){
-    setTimeout(function(){
-        document.getElementById("preloader").style.display = "none";
-    }, 2500); // 2.5 seconds preloader
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        let preloader = document.getElementById("preloader");
+        preloader.style.opacity = "0";
+
+        setTimeout(() => {
+            preloader.style.display = "none";
+        }, 800);
+    }, 2500);
 });
 </script>
 
 </body>
-</html>
+    </html>
