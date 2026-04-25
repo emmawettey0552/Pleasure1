@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pleasure 1 Aluminum Enterprise</title>
+
+<style>
+body { margin:0; font-family: Arial, sans-serif; }
+
+header {
+    background:#7b3f98;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* BANNER SLIDER */
+.banner {
+    position:relative;
+    width:100%;
+    height:300px;
+    overflow:hidden;
+}
+
+.banner img {
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    position:absolute;
+    opacity:0;
+    animation:slideShow 12s infinite;
+}
+
+.banner img:nth-child(1){ animation-delay:0s; }
+.banner img:nth-child(2){ animation-delay:4s; }
+.banner img:nth-child(3){ animation-delay:8s; }
+
+@keyframes slideShow {
+    0% { opacity:0; }
+    10% { opacity:1; }
+    30% { opacity:1; }
+    40% { opacity:0; }
+    100% { opacity:0; }
+}
+
+.hero-text {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    color:white;
+    text-align:center;
+    animation:fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform:translate(-50%, -60%);} 
+    to { opacity:1; transform:translate(-50%, -50%);} 
+}
+
+.services {
+    padding:40px;
+    text-align:center;
+}
+
+.service-list {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:15px;
+}
+
+.service {
+    background:#fff;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contact {
+    background:#7b3f98;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+.whatsapp {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px;
+    border-radius:50%;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>Pleasure 1 Aluminum Enterprise</header>
+
+<!-- BANNER -->
+<div class="banner">
+    <img src="/mnt/data/IMG-20260425-WA0000.jpg">
+    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c">
+
+    <div class="hero-text">
+        <h1>Quality Aluminum Works</h1>
+        <p>Sliding Windows • Doors • Frameless Glass</p>
+    </div>
+</div>
+
+<section class="services">
+    <h2>Our Services</h2>
+    <div class="service-list">
+        <div class="service">Sliding Windows</div>
+        <div class="service">Hinge Doors</div>
+        <div class="service">Swing Doors</div>
+        <div class="service">Frameless Glass</div>
+        <div class="service">Showcase Designs</div>
+        <div class="service">Custom Aluminum Works</div>
+    </div>
+</section>
+
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>📞 0599389968 / 0209926962</p>
+    <p>📍 Ofankor Barrier, Pentecost Junction</p>
+</section>
+
+<a class="whatsapp" href="https://wa.me/233599389968">💬</a>
+
+</body>
+  </html>
+  
