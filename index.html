@@ -10,13 +10,9 @@
 /* GLOBAL */
 body {
     margin:0;
-    font-family: Arial, sans-serif;
-    animation: pageFade 1s ease-in;
-}
-
-@keyframes pageFade {
-    from { opacity:0; }
-    to { opacity:1; }
+    font-family: 'Segoe UI', sans-serif;
+    background:#f4f4f8;
+    overflow-x:hidden;
 }
 
 /* PRELOADER */
@@ -24,14 +20,13 @@ body {
     position:fixed;
     width:100%;
     height:100%;
-    background:#7b3f98;
+    background:linear-gradient(135deg,#7b3f98,#4b2260);
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     z-index:9999;
     color:white;
-    text-align:center;
     transition: opacity 0.8s ease;
 }
 
@@ -46,124 +41,149 @@ body {
 }
 
 .loader-text {
-    font-size:26px;
+    font-size:22px;
     font-weight:bold;
     animation: pulse 1.5s infinite;
 }
 
-@keyframes spin {
-    0% { transform:rotate(0deg); }
-    100% { transform:rotate(360deg); }
-}
-
-@keyframes pulse {
-    0% { opacity:0.4; transform:scale(0.95); }
-    50% { opacity:1; transform:scale(1.05); }
-    100% { opacity:0.4; transform:scale(0.95); }
-}
+@keyframes spin { 100% { transform:rotate(360deg); } }
+@keyframes pulse { 50% { opacity:0.5; transform:scale(1.05); } }
 
 /* HEADER */
 header {
-    background:#7b3f98;
+    background:rgba(123,63,152,0.95);
     color:white;
-    padding:15px;
+    padding:18px;
     text-align:center;
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
-    animation: slideDown 1s ease;
-}
-
-@keyframes slideDown {
-    from { transform:translateY(-50px); opacity:0; }
-    to { transform:translateY(0); opacity:1; }
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter: blur(10px);
 }
 
 /* BANNER */
 .banner {
     position:relative;
     width:100%;
-    height:220px;
+    height:260px;
     overflow:hidden;
-    background:#7b3f98;
 }
 
-.banner img {
+.slide {
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:1.2s;
+}
+
+.slide.active {
+    opacity:1;
+}
+
+.slide img {
     width:100%;
     height:100%;
     object-fit:cover;
-    animation: bannerMove 6s ease-in-out infinite alternate;
-}
-
-@keyframes bannerMove {
-    0% { transform:scale(1.05) translateY(-10px); }
-    100% { transform:scale(1.05) translateY(10px); }
 }
 
 .overlay {
     position:absolute;
     width:100%;
     height:100%;
-    background: linear-gradient(to bottom, rgba(123,63,152,0.2), rgba(0,0,0,0.3));
+    background:linear-gradient(to bottom,rgba(123,63,152,0.3),rgba(0,0,0,0.5));
 }
 
 .hero-text {
     position:absolute;
     top:50%;
     left:50%;
-    transform:translate(-50%, -50%);
+    transform:translate(-50%,-50%);
     color:white;
     text-align:center;
 }
 
-.title {
-    font-size:28px;
-    font-weight:bold;
+/* CEO SECTION */
+.ceo-section {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+    background:white;
 }
 
-.subtitle {
-    margin-top:10px;
-    font-size:16px;
+.ceo-card {
+    display:flex;
+    align-items:center;
+    gap:25px;
+    background:linear-gradient(135deg,#ffffff,#f3f0f7);
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    max-width:700px;
+    animation: fadeUp 1s ease;
+}
+
+.ceo-img {
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #7b3f98;
+    animation: floatGlow 3s ease-in-out infinite;
+}
+
+@keyframes floatGlow {
+    0% { transform:translateY(0); box-shadow:0 0 10px #7b3f98; }
+    50% { transform:translateY(-10px); box-shadow:0 0 25px #7b3f98; }
+    100% { transform:translateY(0); box-shadow:0 0 10px #7b3f98; }
+}
+
+.ceo-text h2 {
+    margin:0;
+    color:#7b3f98;
+}
+
+.ceo-text h3 {
+    margin:5px 0;
+    font-weight:600;
+}
+
+.ceo-text p {
+    font-size:14px;
+    color:#444;
+    line-height:1.5;
 }
 
 /* SERVICES */
 .services {
-    padding:40px;
+    padding:40px 20px;
     text-align:center;
 }
 
 .service-list {
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
     gap:15px;
 }
 
 .service {
-    background:#fff;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s ease;
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    transition:0.4s;
 }
 
 .service:hover {
-    transform:translateY(-10px);
-    box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* GALLERY BUTTON */
-.gallery-btn {
-    display:inline-block;
-    margin:20px;
-    padding:12px 25px;
-    background:#7b3f98;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
+    transform:translateY(-8px);
 }
 
 /* CONTACT */
 .contact {
-    background:#7b3f98;
+    background:linear-gradient(135deg,#7b3f98,#4b2260);
     color:white;
     padding:30px;
     text-align:center;
@@ -178,8 +198,14 @@ header {
     color:white;
     padding:15px;
     border-radius:50%;
-    text-decoration:none;
     font-size:20px;
+    text-decoration:none;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(40px); }
+    to { opacity:1; transform:translateY(0); }
 }
 
 </style>
@@ -197,18 +223,44 @@ header {
 
 <!-- BANNER -->
 <div class="banner">
-    <img src="IMG-20260425-WA0000.jpg">
-    <div class="overlay"></div>
+
+    <div class="slide active">
+        <img src="IMG-20260425-WA0000.jpg">
+        <div class="overlay"></div>
+    </div>
 
     <div class="hero-text">
-        <h1 class="title">Pleasure 1 Aluminum Enterprise</h1>
-        <p class="subtitle">Sliding Windows • Doors • Frameless Glass</p>
+        <h1>Pleasure 1 Aluminum Enterprise</h1>
+        <p>Sliding Windows • Doors • Frameless Glass</p>
     </div>
+
 </div>
+
+<!-- CEO PROFILE SECTION -->
+<section class="ceo-section">
+    <div class="ceo-card">
+
+        <!-- 👇 PUT YOUR IMAGE HERE -->
+        <img src="ceo.jpg" class="ceo-img" alt="CEO Mr. John">
+
+        <div class="ceo-text">
+            <h2>Mr. John</h2>
+            <h3>Chief Executive Officer (CEO)</h3>
+            <p>
+                Mr. John is the visionary founder and CEO of Pleasure 1 Aluminum Enterprise.
+                With years of experience in aluminum fabrication, glass design, and construction engineering,
+                he has built the company into a trusted brand known for quality, precision, and excellence.
+                His leadership continues to inspire innovation and customer satisfaction across all projects.
+            </p>
+        </div>
+
+    </div>
+</section>
 
 <!-- SERVICES -->
 <section class="services">
     <h2>Our Services</h2>
+
     <div class="service-list">
         <div class="service">Sliding Windows</div>
         <div class="service">Hinge Doors</div>
@@ -217,8 +269,6 @@ header {
         <div class="service">Showcase Designs</div>
         <div class="service">Custom Aluminum Works</div>
     </div>
-
-    <a href="gallery.html" class="gallery-btn">View Our Gallery</a>
 </section>
 
 <!-- CONTACT -->
@@ -232,13 +282,14 @@ header {
 
 <script>
 window.addEventListener("load", function () {
-    setTimeout(function () {
-        let preloader = document.getElementById("preloader");
-        preloader.style.opacity = "0";
-        setTimeout(() => { preloader.style.display = "none"; }, 800);
-    }, 2000);
+    setTimeout(() => {
+        document.getElementById("preloader").style.opacity = "0";
+        setTimeout(() => {
+            document.getElementById("preloader").style.display = "none";
+        }, 800);
+    }, 1500);
 });
 </script>
 
 </body>
-        </html>
+</html>
