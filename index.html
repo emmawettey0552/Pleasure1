@@ -7,7 +7,7 @@
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* GLOBAL */
 body {
     margin:0;
     font-family: Arial, sans-serif;
@@ -19,7 +19,7 @@ body {
     to { opacity:1; }
 }
 
-/* ================= PRELOADER ================= */
+/* PRELOADER */
 #preloader {
     position:fixed;
     width:100%;
@@ -62,7 +62,7 @@ body {
     100% { opacity:0.4; transform:scale(0.95); }
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 header {
     background:#7b3f98;
     color:white;
@@ -78,11 +78,11 @@ header {
     to { transform:translateY(0); opacity:1; }
 }
 
-/* ================= BANNER ================= */
+/* BANNER */
 .banner {
     position:relative;
     width:100%;
-    height:180px;
+    height:320px;
     overflow:hidden;
     background:#7b3f98;
 }
@@ -118,26 +118,14 @@ header {
 .title {
     font-size:28px;
     font-weight:bold;
-    animation: fadeDown 1.5s ease;
 }
 
 .subtitle {
     margin-top:10px;
     font-size:16px;
-    animation: fadeUp 2s ease;
 }
 
-@keyframes fadeDown {
-    from { opacity:0; transform:translateY(-30px); }
-    to { opacity:1; transform:translateY(0); }
-}
-
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(30px); }
-    to { opacity:1; transform:translateY(0); }
-}
-
-/* ================= SERVICES ================= */
+/* SERVICES */
 .services {
     padding:40px;
     text-align:center;
@@ -155,7 +143,6 @@ header {
     border-radius:10px;
     box-shadow:0 4px 10px rgba(0,0,0,0.1);
     transition:0.3s ease;
-    animation: fadeInUp 1s ease;
 }
 
 .service:hover {
@@ -163,26 +150,26 @@ header {
     box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
-@keyframes fadeInUp {
-    from { opacity:0; transform:translateY(30px); }
-    to { opacity:1; transform:translateY(0); }
+/* GALLERY BUTTON */
+.gallery-btn {
+    display:inline-block;
+    margin:20px;
+    padding:12px 25px;
+    background:#7b3f98;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
 }
 
-/* ================= CONTACT ================= */
+/* CONTACT */
 .contact {
     background:#7b3f98;
     color:white;
     padding:30px;
     text-align:center;
-    animation: fadeIn 1.5s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity:0; }
-    to { opacity:1; }
-}
-
-/* ================= WHATSAPP ================= */
+/* WHATSAPP */
 .whatsapp {
     position:fixed;
     bottom:20px;
@@ -193,13 +180,6 @@ header {
     border-radius:50%;
     text-decoration:none;
     font-size:20px;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { transform:scale(1); }
-    50% { transform:scale(1.2); }
-    100% { transform:scale(1); }
 }
 
 </style>
@@ -217,7 +197,7 @@ header {
 
 <!-- BANNER -->
 <div class="banner">
-    <img src="IMG-20260425-WA0000.jpg" alt="Company Banner">
+    <img src="IMG-20260425-WA0000.jpg">
     <div class="overlay"></div>
 
     <div class="hero-text">
@@ -237,6 +217,8 @@ header {
         <div class="service">Showcase Designs</div>
         <div class="service">Custom Aluminum Works</div>
     </div>
+
+    <a href="gallery.html" class="gallery-btn">View Our Gallery</a>
 </section>
 
 <!-- CONTACT -->
@@ -246,22 +228,17 @@ header {
     <p>📍 Ofankor Barrier, Pentecost Junction</p>
 </section>
 
-<!-- WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/233599389968">💬</a>
 
-<!-- SCRIPT -->
 <script>
 window.addEventListener("load", function () {
     setTimeout(function () {
         let preloader = document.getElementById("preloader");
         preloader.style.opacity = "0";
-
-        setTimeout(() => {
-            preloader.style.display = "none";
-        }, 800);
-    }, 2500);
+        setTimeout(() => { preloader.style.display = "none"; }, 800);
+    }, 2000);
 });
 </script>
 
 </body>
-            </html>
+        </html>
