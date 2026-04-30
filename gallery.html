@@ -6,246 +6,592 @@
 <title>Gallery - Pleasure 1 Aluminum Enterprise</title>
 
 <style>
-body {
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#ece9f1,#f5f5f5);
+
+    background:
+    linear-gradient(
+        135deg,
+        #f3eef7,
+        #ece5f3,
+        #f7f7f7
+    );
+
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+/* ANIMATED BACKGROUND */
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 /* HEADER */
-header {
+header{
     background:linear-gradient(90deg,#7b3f98,#9b59b6);
     color:white;
-    padding:18px;
+    padding:20px;
     text-align:center;
-    font-size:24px;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:1px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 /* BACK BUTTON */
-.back {
+.back{
     display:inline-block;
     margin:20px;
+    padding:10px 18px;
+    background:white;
+    border-radius:30px;
     color:#7b3f98;
     text-decoration:none;
     font-weight:bold;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
 }
 
-/* GRID */
-.gallery {
-    padding:20px;
+.back:hover{
+    transform:translateY(-3px);
+    background:#7b3f98;
+    color:white;
+}
+
+/* GALLERY */
+.gallery{
+    padding:25px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:25px;
 }
 
 /* CARD */
-.card {
+.card{
     position:relative;
-    border-radius:18px;
     overflow:hidden;
-    transform-style:preserve-3d;
-    transition:transform 0.4s;
-    animation:fadeUp 0.8s ease forwards;
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15),
+        inset 0 1px 1px rgba(255,255,255,0.4);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+    animation:floatUp 1s ease forwards;
+}
+
+/* CARD HOVER */
+.card:hover{
+    transform:
+        translateY(-12px)
+        scale(1.03)
+        rotateX(4deg)
+        rotateY(4deg);
+
+    box-shadow:
+        0 25px 50px rgba(123,63,152,0.35),
+        0 0 25px rgba(155,89,182,0.3);
 }
 
 /* IMAGE */
-.card img {
+.card img{
     width:100%;
-    height:230px;
+    height:240px;
     object-fit:cover;
-    display:block;
-    transition:0.5s;
-}
 
-/* 3D HOVER */
-.card:hover {
-    transform:rotateY(5deg) rotateX(5deg) scale(1.05);
+    transition:
+        transform 0.8s ease,
+        filter 0.6s ease;
 }
 
 /* IMAGE EFFECT */
-.card:hover img {
+.card:hover img{
     transform:scale(1.15);
-    filter:brightness(70%);
+
+    filter:
+        brightness(0.75)
+        contrast(1.1)
+        saturate(1.2);
 }
 
 /* SHINE EFFECT */
-.card::before {
+.card::before{
     content:'';
     position:absolute;
     top:0;
     left:-100%;
     width:100%;
     height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
-    transition:0.5s;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    transition:0.7s;
 }
 
-.card:hover::before {
+.card:hover::before{
     left:100%;
 }
 
-/* OVERLAY TEXT */
-.overlay {
+/* OVERLAY */
+.overlay{
     position:absolute;
-    bottom:0;
-    width:100%;
-    padding:10px;
-    text-align:center;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.2)
+    );
+
     color:white;
-    background:rgba(0,0,0,0.5);
+    font-size:20px;
+    font-weight:bold;
+    letter-spacing:1px;
+
     opacity:0;
-    transition:0.4s;
+    transition:0.5s ease;
 }
 
-.card:hover .overlay {
+.card:hover .overlay{
     opacity:1;
 }
 
 /* LIGHTBOX */
-#lightbox {
+#lightbox{
     position:fixed;
-    width:100%;
-    height:100%;
+    inset:0;
+
     background:rgba(0,0,0,0.96);
     backdrop-filter:blur(10px);
+
     display:none;
     justify-content:center;
     align-items:center;
     flex-direction:column;
+
     z-index:999;
 }
 
-#lightbox img {
+/* LIGHTBOX IMAGE */
+#lightbox img{
     max-width:85%;
     max-height:80%;
-    border-radius:12px;
+    border-radius:15px;
+
     animation:zoom 0.4s ease;
 }
 
-/* NAV */
-.nav {
+/* CLOSE BUTTON */
+.close{
     position:absolute;
-    top:50%;
-    transform:translateY(-50%);
+    top:20px;
+    right:30px;
+
     font-size:40px;
     color:white;
     cursor:pointer;
 }
 
-.prev { left:20px; }
-.next { right:20px; }
-
-/* CLOSE */
-.close {
+/* NAVIGATION */
+.nav{
     position:absolute;
-    top:20px;
-    right:30px;
-    font-size:35px;
+    top:50%;
+    transform:translateY(-50%);
+
+    font-size:50px;
     color:white;
+
     cursor:pointer;
+    user-select:none;
 }
+
+.prev{left:20px;}
+.next{right:20px;}
 
 /* ANIMATIONS */
-@keyframes zoom {
-    from {transform:scale(0.6);opacity:0;}
-    to {transform:scale(1);opacity:1;}
+@keyframes zoom{
+    from{
+        transform:scale(0.6);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 
-@keyframes fadeUp {
-    from {opacity:0;transform:translateY(40px);}
-    to {opacity:1;transform:translateY(0);}
+@keyframes floatUp{
+    from{
+        opacity:0;
+        transform:
+            translateY(40px)
+            scale(0.9);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
 }
+
 </style>
 </head>
 
 <body>
 
 <header>Our Work Gallery</header>
+
 <a href="index.html" class="back">⬅ Back to Home</a>
 
 <div class="gallery">
 
-<!-- SAME IMAGES (UNCHANGED) -->
-<div class="card"><img src="IMG-20260426-WA0003.jpg" loading="lazy" onclick="openImage(0)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0004.jpg" loading="lazy" onclick="openImage(1)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0005.jpg" loading="lazy" onclick="openImage(2)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0006.jpg" loading="lazy" onclick="openImage(3)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0007.jpg" loading="lazy" onclick="openImage(4)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0008.jpg" loading="lazy" onclick="openImage(5)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0009.jpg" loading="lazy" onclick="openImage(6)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0010.jpg" loading="lazy" onclick="openImage(7)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0011.jpg" loading="lazy" onclick="openImage(8)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0012.jpg" loading="lazy" onclick="openImage(9)"><div class="overlay">View Design</div></div>
+<div class="card">
+<img src="IMG-20260426-WA0003.jpg" loading="lazy" onclick="openImage(0)">
+<div class="overlay">View Design</div>
+</div>
 
-<!-- CONTINUE SAME PATTERN -->
-<div class="card"><img src="IMG-20260426-WA0013.jpg" loading="lazy" onclick="openImage(10)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0014.jpg" loading="lazy" onclick="openImage(11)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0015.jpg" loading="lazy" onclick="openImage(12)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0016.jpg" loading="lazy" onclick="openImage(13)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0017.jpg" loading="lazy" onclick="openImage(14)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0018.jpg" loading="lazy" onclick="openImage(15)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0019.jpg" loading="lazy" onclick="openImage(16)"><div class="overlay">View Design</div></div>
-<div class="card"><img src="IMG-20260426-WA0020.jpg" loading="lazy" onclick="openImage(17)"><div class="overlay">View Design</div></div>
+<div class="card">
+<img src="IMG-20260426-WA0004.jpg" loading="lazy" onclick="openImage(1)">
+<div class="overlay">View Design</div>
+</div>
 
-<!-- KEEP SAME UNTIL LAST -->
-<div class="card"><img src="IMG-20260426-WA0045.jpg" loading="lazy" onclick="openImage(42)"><div class="overlay">View Design</div></div>
+<div class="card">
+<img src="IMG-20260426-WA0005.jpg" loading="lazy" onclick="openImage(2)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0006.jpg" loading="lazy" onclick="openImage(3)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0007.jpg" loading="lazy" onclick="openImage(4)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0008.jpg" loading="lazy" onclick="openImage(5)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0009.jpg" loading="lazy" onclick="openImage(6)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0010.jpg" loading="lazy" onclick="openImage(7)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0011.jpg" loading="lazy" onclick="openImage(8)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0012.jpg" loading="lazy" onclick="openImage(9)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0013.jpg" loading="lazy" onclick="openImage(10)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0014.jpg" loading="lazy" onclick="openImage(11)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0015.jpg" loading="lazy" onclick="openImage(12)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0016.jpg" loading="lazy" onclick="openImage(13)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0017.jpg" loading="lazy" onclick="openImage(14)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0018.jpg" loading="lazy" onclick="openImage(15)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0019.jpg" loading="lazy" onclick="openImage(16)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0020.jpg" loading="lazy" onclick="openImage(17)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0021.jpg" loading="lazy" onclick="openImage(18)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0022.jpg" loading="lazy" onclick="openImage(19)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0023.jpg" loading="lazy" onclick="openImage(20)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0024.jpg" loading="lazy" onclick="openImage(21)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0025.jpg" loading="lazy" onclick="openImage(22)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0026.jpg" loading="lazy" onclick="openImage(23)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0027.jpg" loading="lazy" onclick="openImage(24)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0028.jpg" loading="lazy" onclick="openImage(25)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0029.jpg" loading="lazy" onclick="openImage(26)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0030.jpg" loading="lazy" onclick="openImage(27)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0031.jpg" loading="lazy" onclick="openImage(28)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0032.jpg" loading="lazy" onclick="openImage(29)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0033.jpg" loading="lazy" onclick="openImage(30)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0034.jpg" loading="lazy" onclick="openImage(31)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0035.jpg" loading="lazy" onclick="openImage(32)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0036.jpg" loading="lazy" onclick="openImage(33)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0037.jpg" loading="lazy" onclick="openImage(34)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0038.jpg" loading="lazy" onclick="openImage(35)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0039.jpg" loading="lazy" onclick="openImage(36)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0040.jpg" loading="lazy" onclick="openImage(37)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0041.jpg" loading="lazy" onclick="openImage(38)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0042.jpg" loading="lazy" onclick="openImage(39)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0043.jpg" loading="lazy" onclick="openImage(40)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0044.jpg" loading="lazy" onclick="openImage(41)">
+<div class="overlay">View Design</div>
+</div>
+
+<div class="card">
+<img src="IMG-20260426-WA0045.jpg" loading="lazy" onclick="openImage(42)">
+<div class="overlay">View Design</div>
+</div>
 
 </div>
 
 <!-- LIGHTBOX -->
+
 <div id="lightbox">
+
 <span class="close" onclick="closeImage()">&times;</span>
+
 <span class="nav prev" onclick="prevImage()">❮</span>
+
 <img id="lightbox-img">
+
 <span class="nav next" onclick="nextImage()">❯</span>
+
 </div>
 
 <script>
+
 let images = [
-"IMG-20260426-WA0003.jpg","IMG-20260426-WA0004.jpg","IMG-20260426-WA0005.jpg",
-"IMG-20260426-WA0006.jpg","IMG-20260426-WA0007.jpg","IMG-20260426-WA0008.jpg",
-"IMG-20260426-WA0009.jpg","IMG-20260426-WA0010.jpg","IMG-20260426-WA0011.jpg",
-"IMG-20260426-WA0012.jpg","IMG-20260426-WA0013.jpg","IMG-20260426-WA0014.jpg",
-"IMG-20260426-WA0015.jpg","IMG-20260426-WA0016.jpg","IMG-20260426-WA0017.jpg",
-"IMG-20260426-WA0018.jpg","IMG-20260426-WA0019.jpg","IMG-20260426-WA0020.jpg",
-"IMG-20260426-WA0021.jpg","IMG-20260426-WA0022.jpg","IMG-20260426-WA0023.jpg",
-"IMG-20260426-WA0024.jpg","IMG-20260426-WA0025.jpg","IMG-20260426-WA0026.jpg",
-"IMG-20260426-WA0027.jpg","IMG-20260426-WA0028.jpg","IMG-20260426-WA0029.jpg",
-"IMG-20260426-WA0030.jpg","IMG-20260426-WA0031.jpg","IMG-20260426-WA0032.jpg",
-"IMG-20260426-WA0033.jpg","IMG-20260426-WA0034.jpg","IMG-20260426-WA0035.jpg",
-"IMG-20260426-WA0036.jpg","IMG-20260426-WA0037.jpg","IMG-20260426-WA0038.jpg",
-"IMG-20260426-WA0039.jpg","IMG-20260426-WA0040.jpg","IMG-20260426-WA0041.jpg",
-"IMG-20260426-WA0042.jpg","IMG-20260426-WA0043.jpg","IMG-20260426-WA0044.jpg",
+"IMG-20260426-WA0003.jpg",
+"IMG-20260426-WA0004.jpg",
+"IMG-20260426-WA0005.jpg",
+"IMG-20260426-WA0006.jpg",
+"IMG-20260426-WA0007.jpg",
+"IMG-20260426-WA0008.jpg",
+"IMG-20260426-WA0009.jpg",
+"IMG-20260426-WA0010.jpg",
+"IMG-20260426-WA0011.jpg",
+"IMG-20260426-WA0012.jpg",
+"IMG-20260426-WA0013.jpg",
+"IMG-20260426-WA0014.jpg",
+"IMG-20260426-WA0015.jpg",
+"IMG-20260426-WA0016.jpg",
+"IMG-20260426-WA0017.jpg",
+"IMG-20260426-WA0018.jpg",
+"IMG-20260426-WA0019.jpg",
+"IMG-20260426-WA0020.jpg",
+"IMG-20260426-WA0021.jpg",
+"IMG-20260426-WA0022.jpg",
+"IMG-20260426-WA0023.jpg",
+"IMG-20260426-WA0024.jpg",
+"IMG-20260426-WA0025.jpg",
+"IMG-20260426-WA0026.jpg",
+"IMG-20260426-WA0027.jpg",
+"IMG-20260426-WA0028.jpg",
+"IMG-20260426-WA0029.jpg",
+"IMG-20260426-WA0030.jpg",
+"IMG-20260426-WA0031.jpg",
+"IMG-20260426-WA0032.jpg",
+"IMG-20260426-WA0033.jpg",
+"IMG-20260426-WA0034.jpg",
+"IMG-20260426-WA0035.jpg",
+"IMG-20260426-WA0036.jpg",
+"IMG-20260426-WA0037.jpg",
+"IMG-20260426-WA0038.jpg",
+"IMG-20260426-WA0039.jpg",
+"IMG-20260426-WA0040.jpg",
+"IMG-20260426-WA0041.jpg",
+"IMG-20260426-WA0042.jpg",
+"IMG-20260426-WA0043.jpg",
+"IMG-20260426-WA0044.jpg",
 "IMG-20260426-WA0045.jpg"
 ];
 
-let index = 0;
+let currentIndex = 0;
 
-function openImage(i){
-    index = i;
-    document.getElementById("lightbox").style.display="flex";
-    document.getElementById("lightbox-img").src=images[i];
+function openImage(index){
+    currentIndex = index;
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = images[index];
 }
 
 function closeImage(){
-    document.getElementById("lightbox").style.display="none";
+    document.getElementById("lightbox").style.display = "none";
 }
 
 function nextImage(){
-    index=(index+1)%images.length;
-    document.getElementById("lightbox-img").src=images[index];
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("lightbox-img").src = images[currentIndex];
 }
 
 function prevImage(){
-    index=(index-1+images.length)%images.length;
-    document.getElementById("lightbox-img").src=images[index];
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("lightbox-img").src = images[currentIndex];
 }
 
-document.addEventListener("keydown",(e)=>{
-    if(e.key==="ArrowRight") nextImage();
-    if(e.key==="ArrowLeft") prevImage();
-    if(e.key==="Escape") closeImage();
+document.addEventListener("keydown",function(e){
+
+    if(e.key === "ArrowRight"){
+        nextImage();
+    }
+
+    if(e.key === "ArrowLeft"){
+        prevImage();
+    }
+
+    if(e.key === "Escape"){
+        closeImage();
+    }
+
 });
+
 </script>
 
 </body>
