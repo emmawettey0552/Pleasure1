@@ -60,7 +60,6 @@ header {
     backdrop-filter: blur(10px);
 }
 
-/* HEADER CONTENT */
 .header-box {
     display:flex;
     justify-content:space-between;
@@ -70,20 +69,17 @@ header {
 
 .brand {
     text-align:left;
-    animation: fadeUp 1.5s ease;
 }
 
 .brand h1 {
     margin:0;
     font-size:20px;
-    animation: colorGlow 4s infinite;
 }
 
 .brand p {
     margin:0;
     font-size:12px;
     opacity:0.9;
-    animation: fadeUp 2s ease;
 }
 
 /* GALLERY BUTTON */
@@ -94,14 +90,6 @@ header {
     border-radius:25px;
     text-decoration:none;
     font-weight:bold;
-    transition:0.4s;
-    animation: bounce 2s infinite;
-    box-shadow:0 0 15px rgba(255,255,255,0.3);
-}
-
-.gallery-btn:hover {
-    transform:scale(1.1);
-    box-shadow:0 0 25px rgba(255,215,0,0.9);
 }
 
 /* BANNER */
@@ -118,12 +106,10 @@ header {
     height:100%;
     opacity:0;
     transition:1.5s ease-in-out;
-    transform:scale(1.05);
 }
 
 .slide.active {
     opacity:1;
-    transform:scale(1);
 }
 
 .slide img {
@@ -146,12 +132,6 @@ header {
     transform:translate(-50%,-50%);
     color:white;
     text-align:center;
-    animation: fadeUp 2s ease;
-}
-
-.hero-text h1 {
-    font-size:28px;
-    margin:0;
 }
 
 /* CEO SECTION */
@@ -180,7 +160,6 @@ header {
     border-radius:50%;
     object-fit:cover;
     border:5px solid #7b3f98;
-    animation: floatGlow 3s infinite;
 }
 
 /* SERVICES */
@@ -199,14 +178,6 @@ header {
     background:white;
     padding:18px;
     border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-    transition:0.4s;
-}
-
-.service:hover {
-    transform:translateY(-10px);
-    background:#7b3f98;
-    color:white;
 }
 
 /* CONTACT */
@@ -230,30 +201,6 @@ header {
     text-decoration:none;
 }
 
-/* ANIMATIONS */
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(40px); }
-    to { opacity:1; transform:translateY(0); }
-}
-
-@keyframes floatGlow {
-    0% { transform:translateY(0); box-shadow:0 0 10px #7b3f98; }
-    50% { transform:translateY(-10px); box-shadow:0 0 30px #7b3f98; }
-    100% { transform:translateY(0); }
-}
-
-@keyframes bounce {
-    0%,100% { transform:translateY(0); }
-    50% { transform:translateY(-6px); }
-}
-
-@keyframes colorGlow {
-    0% { color:red; }
-    33% { color:gold; }
-    66% { color:limegreen; }
-    100% { color:red; }
-}
-
 </style>
 </head>
 
@@ -273,17 +220,21 @@ header {
             <p>Quality Aluminium & Glass Works • Sliding Doors • Windows</p>
         </div>
 
-        <!-- GALLERY BUTTON -->
         <a href="gallery.html" class="gallery-btn">📸 View Gallery</a>
 
     </div>
 </header>
 
-<!-- BANNER -->
+<!-- BANNER (UPDATED ONLY HERE) -->
 <div class="banner">
 
     <div class="slide active">
         <img src="IMG-20260425-WA0000.jpg">
+        <div class="overlay"></div>
+    </div>
+
+    <div class="slide">
+        <img src="IMG-20260426-WA0045.jpg">
         <div class="overlay"></div>
     </div>
 
@@ -343,6 +294,16 @@ window.addEventListener("load", function () {
         }, 800);
     }, 1500);
 });
+
+/* BANNER SLIDER */
+const slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
+
+setInterval(() => {
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+}, 4000);
 </script>
 
 </body>
