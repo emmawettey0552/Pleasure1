@@ -15,12 +15,12 @@ body {
     overflow-x:hidden;
 }
 
-/* COLOR BLINK ANIMATION */
+/* COLOR BLINK ANIMATION (SLOW + BRIGHT PROFESSIONAL) */
 @keyframes colorBlink {
-    0% { color:red; text-shadow:0 0 15px red; }
-    33% { color:blue; text-shadow:0 0 15px blue; }
-    66% { color:lime; text-shadow:0 0 15px lime; }
-    100% { color:red; text-shadow:0 0 15px red; }
+    0% { color:red; text-shadow:0 0 18px red; }
+    33% { color:#FFD700; text-shadow:0 0 18px #FFD700; } /* GOLD */
+    66% { color:#00ff6a; text-shadow:0 0 18px #00ff6a; } /* GREEN */
+    100% { color:red; text-shadow:0 0 18px red; }
 }
 
 /* FLOAT ANIMATION */
@@ -42,7 +42,7 @@ body {
     flex-direction:column;
     z-index:9999;
     color:white;
-    transition: opacity 0.8s ease;
+    transition: opacity 1.2s ease; /* slower fade */
 }
 
 .loader {
@@ -55,13 +55,12 @@ body {
     margin-bottom:20px;
 }
 
+/* PRELOADER TEXT (SLOW BLINK) */
 .loader-text {
     font-size:22px;
     font-weight:bold;
-    animation: colorBlink 1.2s infinite;
+    animation: colorBlink 3.5s infinite;
 }
-
-@keyframes spin { 100% { transform:rotate(360deg); } }
 
 /* HEADER */
 header {
@@ -85,11 +84,11 @@ header {
     text-align:left;
 }
 
-/* BRAND ANIMATION */
+/* BRAND NAME (SLOW BLINK) */
 .brand h1 {
     margin:0;
     font-size:20px;
-    animation: colorBlink 1.2s infinite;
+    animation: colorBlink 3.5s infinite;
 }
 
 .brand p {
@@ -109,7 +108,6 @@ header {
     transition:0.3s ease;
 }
 
-/* HOVER ANIMATION */
 .gallery-btn:hover {
     transform:scale(1.1);
     box-shadow:0 0 20px rgba(0,0,0,0.4);
@@ -230,6 +228,10 @@ header {
     text-decoration:none;
 }
 
+@keyframes spin { 
+    100% { transform:rotate(360deg); } 
+}
+
 </style>
 </head>
 
@@ -320,8 +322,8 @@ window.addEventListener("load", function () {
         document.getElementById("preloader").style.opacity = "0";
         setTimeout(() => {
             document.getElementById("preloader").style.display = "none";
-        }, 800);
-    }, 1500);
+        }, 2000); // slower reveal (~2 seconds)
+    }, 2000);
 });
 
 const slides = document.querySelectorAll(".slide");
