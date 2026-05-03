@@ -15,24 +15,11 @@ body {
     overflow-x:hidden;
 }
 
-/* SCROLL ANIMATION BASE STATE */
-.scroll-reveal {
-    opacity:0;
-    transform:translateY(40px);
-    transition: all 0.8s ease;
-}
-
-/* ACTIVE STATE WHEN VISIBLE */
-.scroll-reveal.show {
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* COLOR BLINK ANIMATION */
+/* COLOR BLINK ANIMATION (SLOW + BRIGHT PROFESSIONAL) */
 @keyframes colorBlink {
     0% { color:red; text-shadow:0 0 18px red; }
-    33% { color:#FFD700; text-shadow:0 0 18px #FFD700; }
-    66% { color:#00ff6a; text-shadow:0 0 18px #00ff6a; }
+    33% { color:#FFD700; text-shadow:0 0 18px #FFD700; } /* GOLD */
+    66% { color:#00ff6a; text-shadow:0 0 18px #00ff6a; } /* GREEN */
     100% { color:red; text-shadow:0 0 18px red; }
 }
 
@@ -55,7 +42,7 @@ body {
     flex-direction:column;
     z-index:9999;
     color:white;
-    transition: opacity 1.2s ease;
+    transition: opacity 1.2s ease; /* slower fade */
 }
 
 .loader {
@@ -68,6 +55,7 @@ body {
     margin-bottom:20px;
 }
 
+/* PRELOADER TEXT (SLOW BLINK) */
 .loader-text {
     font-size:22px;
     font-weight:bold;
@@ -82,6 +70,7 @@ header {
     position:sticky;
     top:0;
     z-index:1000;
+    backdrop-filter: blur(10px);
 }
 
 .header-box {
@@ -91,10 +80,21 @@ header {
     flex-wrap:wrap;
 }
 
+.brand {
+    text-align:left;
+}
+
+/* BRAND NAME (SLOW BLINK) */
 .brand h1 {
     margin:0;
     font-size:20px;
     animation: colorBlink 3.5s infinite;
+}
+
+.brand p {
+    margin:0;
+    font-size:12px;
+    opacity:0.9;
 }
 
 /* GALLERY BUTTON */
@@ -110,6 +110,7 @@ header {
 
 .gallery-btn:hover {
     transform:scale(1.1);
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 /* BANNER */
@@ -136,6 +137,11 @@ header {
     width:100%;
     height:100%;
     object-fit:cover;
+}
+
+/* FIX SECOND IMAGE FACE POSITION */
+.slide:nth-child(2) img {
+    object-position: center top;
 }
 
 .overlay {
@@ -239,17 +245,20 @@ header {
 
 <header>
     <div class="header-box">
+
         <div class="brand">
             <h1>Pleasure 1 Aluminum Enterprise</h1>
             <p>Quality Aluminium & Glass Works • Sliding Doors • Windows</p>
         </div>
 
         <a href="gallery.html" class="gallery-btn">📸 View Gallery</a>
+
     </div>
 </header>
 
 <!-- BANNER -->
 <div class="banner">
+
     <div class="slide active">
         <img src="IMG-20260425-WA0000.jpg">
         <div class="overlay"></div>
@@ -264,22 +273,29 @@ header {
         <h1>Modern Aluminium & Glass Solutions</h1>
         <p>Strong • Elegant • Reliable</p>
     </div>
+
 </div>
 
 <!-- CEO -->
-<section class="ceo-section scroll-reveal">
+<section class="ceo-section">
     <div class="ceo-card">
+
         <img src="IMG-20260426-WA0048.jpg" class="ceo-img">
+
         <div>
             <h2>Mr. John</h2>
             <h3>CEO & Founder</h3>
-            <p>A visionary leader in aluminium fabrication and glass engineering.</p>
+            <p>
+                A visionary leader in aluminium fabrication and glass engineering,
+                building excellence through innovation and quality craftsmanship.
+            </p>
         </div>
+
     </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services scroll-reveal">
+<section class="services">
     <h2>Our Services</h2>
     <div class="service-list">
         <div class="service">Sliding Windows</div>
@@ -292,7 +308,7 @@ header {
 </section>
 
 <!-- CONTACT -->
-<section class="contact scroll-reveal">
+<section class="contact">
     <h2>Contact Us</h2>
     <p>📞 0599389968 / 0209926962</p>
     <p>📍 Ofankor Barrier, Pentecost Junction</p>
@@ -301,18 +317,15 @@ header {
 <a class="whatsapp" href="https://wa.me/233599389968">💬</a>
 
 <script>
-
-/* PRELOADER */
 window.addEventListener("load", function () {
     setTimeout(() => {
         document.getElementById("preloader").style.opacity = "0";
         setTimeout(() => {
             document.getElementById("preloader").style.display = "none";
-        }, 2000);
+        }, 2000); // slower reveal (~2 seconds)
     }, 2000);
 });
 
-/* SLIDER */
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
 
@@ -321,19 +334,7 @@ setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add("active");
 }, 4000);
-
-/* SCROLL ANIMATION */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-    });
-});
-
-document.querySelectorAll(".scroll-reveal").forEach(el => observer.observe(el));
-
 </script>
 
 </body>
-</html>
+    </html>
