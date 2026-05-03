@@ -15,19 +15,20 @@ body {
     overflow-x:hidden;
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL ANIMATION BASE STATE */
 .scroll-reveal {
     opacity:0;
     transform:translateY(40px);
     transition: all 0.8s ease;
 }
 
+/* ACTIVE STATE WHEN VISIBLE */
 .scroll-reveal.show {
     opacity:1;
     transform:translateY(0);
 }
 
-/* COLOR BLINK */
+/* COLOR BLINK ANIMATION */
 @keyframes colorBlink {
     0% { color:red; text-shadow:0 0 18px red; }
     33% { color:#FFD700; text-shadow:0 0 18px #FFD700; }
@@ -35,7 +36,7 @@ body {
     100% { color:red; text-shadow:0 0 18px red; }
 }
 
-/* FLOAT */
+/* FLOAT ANIMATION */
 @keyframes floatPulse {
     0% { transform:translateY(0px) scale(1); }
     50% { transform:translateY(-8px) scale(1.03); }
@@ -81,6 +82,13 @@ header {
     position:sticky;
     top:0;
     z-index:1000;
+}
+
+.header-box {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
 }
 
 .brand h1 {
@@ -130,10 +138,6 @@ header {
     object-fit:cover;
 }
 
-.slide:nth-child(2) img {
-    object-position:center top;
-}
-
 .overlay {
     position:absolute;
     width:100%;
@@ -141,7 +145,16 @@ header {
     background:linear-gradient(to bottom,rgba(123,63,152,0.4),rgba(0,0,0,0.6));
 }
 
-/* CEO */
+.hero-text {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    text-align:center;
+}
+
+/* CEO SECTION */
 .ceo-section {
     display:flex;
     justify-content:center;
@@ -176,6 +189,18 @@ header {
     text-align:center;
 }
 
+.service-list {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.service {
+    background:white;
+    padding:18px;
+    border-radius:12px;
+}
+
 /* CONTACT */
 .contact {
     background:linear-gradient(135deg,#7b3f98,#4b2260);
@@ -197,29 +222,8 @@ header {
     text-decoration:none;
 }
 
-/* TOAST NOTIFICATION */
-.toast {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background: #222;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.5s ease;
-    z-index: 10000;
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes spin {
-    100% { transform:rotate(360deg); }
+@keyframes spin { 
+    100% { transform:rotate(360deg); } 
 }
 
 </style>
@@ -234,11 +238,14 @@ header {
 </div>
 
 <header>
-    <div class="brand">
-        <h1>Pleasure 1 Aluminum Enterprise</h1>
-    </div>
+    <div class="header-box">
+        <div class="brand">
+            <h1>Pleasure 1 Aluminum Enterprise</h1>
+            <p>Quality Aluminium & Glass Works • Sliding Doors • Windows</p>
+        </div>
 
-    <a href="gallery.html" class="gallery-btn">📸 View Gallery</a>
+        <a href="gallery.html" class="gallery-btn">📸 View Gallery</a>
+    </div>
 </header>
 
 <!-- BANNER -->
@@ -252,6 +259,11 @@ header {
         <img src="Screenshot_20260503-194406_1.png">
         <div class="overlay"></div>
     </div>
+
+    <div class="hero-text">
+        <h1>Modern Aluminium & Glass Solutions</h1>
+        <p>Strong • Elegant • Reliable</p>
+    </div>
 </div>
 
 <!-- CEO -->
@@ -261,6 +273,7 @@ header {
         <div>
             <h2>Mr. John</h2>
             <h3>CEO & Founder</h3>
+            <p>A visionary leader in aluminium fabrication and glass engineering.</p>
         </div>
     </div>
 </section>
@@ -268,20 +281,24 @@ header {
 <!-- SERVICES -->
 <section class="services scroll-reveal">
     <h2>Our Services</h2>
+    <div class="service-list">
+        <div class="service">Sliding Windows</div>
+        <div class="service">Hinge Doors</div>
+        <div class="service">Swing Doors</div>
+        <div class="service">Frameless Glass</div>
+        <div class="service">Showcase Designs</div>
+        <div class="service">Custom Works</div>
+    </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact scroll-reveal">
     <h2>Contact Us</h2>
     <p>📞 0599389968 / 0209926962</p>
+    <p>📍 Ofankor Barrier, Pentecost Junction</p>
 </section>
 
 <a class="whatsapp" href="https://wa.me/233599389968">💬</a>
-
-<!-- TOAST -->
-<div id="toast" class="toast">
-    Welcome to Pleasure 1 Aluminum Enterprise 👋
-</div>
 
 <script>
 
@@ -315,34 +332,6 @@ const observer = new IntersectionObserver(entries => {
 });
 
 document.querySelectorAll(".scroll-reveal").forEach(el => observer.observe(el));
-
-/* TOAST */
-function showToast(){
-    const toast = document.getElementById("toast");
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 4000);
-}
-
-window.addEventListener("load", () => {
-    setTimeout(showToast, 3000);
-});
-
-/* BROWSER NOTIFICATION */
-window.addEventListener("load", () => {
-    if ("Notification" in window) {
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                new Notification("Pleasure 1 Aluminum Enterprise", {
-                    body: "Welcome! We are ready to serve you.",
-                    icon: "IMG-20260426-WA0048.jpg"
-                });
-            }
-        });
-    }
-});
 
 </script>
 
