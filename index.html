@@ -15,6 +15,21 @@ body {
     overflow-x:hidden;
 }
 
+/* COLOR BLINK ANIMATION */
+@keyframes colorBlink {
+    0% { color:red; text-shadow:0 0 15px red; }
+    33% { color:blue; text-shadow:0 0 15px blue; }
+    66% { color:lime; text-shadow:0 0 15px lime; }
+    100% { color:red; text-shadow:0 0 15px red; }
+}
+
+/* FLOAT ANIMATION */
+@keyframes floatPulse {
+    0% { transform:translateY(0px) scale(1); }
+    50% { transform:translateY(-8px) scale(1.03); }
+    100% { transform:translateY(0px) scale(1); }
+}
+
 /* PRELOADER */
 #preloader {
     position:fixed;
@@ -43,11 +58,10 @@ body {
 .loader-text {
     font-size:22px;
     font-weight:bold;
-    animation: pulse 1.5s infinite;
+    animation: colorBlink 1.2s infinite;
 }
 
 @keyframes spin { 100% { transform:rotate(360deg); } }
-@keyframes pulse { 50% { opacity:0.5; transform:scale(1.05); } }
 
 /* HEADER */
 header {
@@ -71,9 +85,11 @@ header {
     text-align:left;
 }
 
+/* BRAND ANIMATION */
 .brand h1 {
     margin:0;
     font-size:20px;
+    animation: colorBlink 1.2s infinite;
 }
 
 .brand p {
@@ -90,6 +106,13 @@ header {
     border-radius:25px;
     text-decoration:none;
     font-weight:bold;
+    transition:0.3s ease;
+}
+
+/* HOVER ANIMATION */
+.gallery-btn:hover {
+    transform:scale(1.1);
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 /* BANNER */
@@ -116,6 +139,11 @@ header {
     width:100%;
     height:100%;
     object-fit:cover;
+}
+
+/* FIX SECOND IMAGE FACE POSITION */
+.slide:nth-child(2) img {
+    object-position: center top;
 }
 
 .overlay {
@@ -160,6 +188,7 @@ header {
     border-radius:50%;
     object-fit:cover;
     border:5px solid #7b3f98;
+    animation: floatPulse 3s infinite ease-in-out;
 }
 
 /* SERVICES */
@@ -225,7 +254,7 @@ header {
     </div>
 </header>
 
-<!-- BANNER (UPDATED ONLY HERE) -->
+<!-- BANNER -->
 <div class="banner">
 
     <div class="slide active">
@@ -295,7 +324,6 @@ window.addEventListener("load", function () {
     }, 1500);
 });
 
-/* BANNER SLIDER */
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
 
