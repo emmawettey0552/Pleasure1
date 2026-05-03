@@ -232,6 +232,27 @@ header {
     100% { transform:rotate(360deg); } 
 }
 
+    /* NOTIFICATION TOAST */
+.toast {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: #222;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s ease;
+    z-index: 10000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
 </style>
 </head>
 
@@ -334,7 +355,37 @@ setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
     slides[currentSlide].classList.add("active");
 }, 4000);
+
+    // TOAST NOTIFICATION
+function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 4000);
+}
+
+// Show after page load
+window.addEventListener("load", () => {
+    setTimeout(showToast, 3000);
+});
+
+// OPTIONAL: Browser notification
+window.addEventListener("load", () => {
+    if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification("Pleasure 1 Aluminum Enterprise", {
+                    body: "Welcome! We are ready to serve you.",
+                    icon: "IMG-20260426-WA0048.jpg"
+                });
+            }
+        });
+    }
+});
 </script>
+    <div id="toast" class="toast">Welcome to Pleasure 1 Aluminum Enterprise 👋</div>
 
 </body>
     </html>
