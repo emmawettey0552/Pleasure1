@@ -616,5 +616,51 @@ View Projects
 
 </div>
 
+<script>
 
+// PROFESSIONAL PRELOADER FIX
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    let progress = 0;
+
+    const progressBar = document.querySelector(".progress");
+    const percentText = document.getElementById("percent");
+    const preloader = document.getElementById("preloader");
+
+
+    let loading = setInterval(function(){
+
+        progress++;
+
+        progressBar.style.width = progress + "%";
+        percentText.textContent = progress + "%";
+
+
+        if(progress >= 100){
+
+            clearInterval(loading);
+
+
+            setTimeout(function(){
+
+                preloader.style.opacity = "0";
+                preloader.style.visibility = "hidden";
+
+
+                document.body.style.overflow = "auto";
+
+
+            },800);
+
+
+        }
+
+
+    },20);
+
+
+});
+
+</script>
   </section>
