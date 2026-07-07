@@ -51,52 +51,185 @@ section{
 
 
 /* =========================
-   PRELOADER
+   PROFESSIONAL PRELOADER
 ========================= */
+
 
 #preloader{
 
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:linear-gradient(135deg,#5E2B97,#32104f);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:9999;
+position:fixed;
+inset:0;
+background:
+linear-gradient(
+135deg,
+#5E2B97,
+#24103d
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:99999;
+
+transition:
+opacity 1s ease,
+visibility 1s ease;
 
 }
 
 
-.loader{
 
-    width:65px;
-    height:65px;
-    border:6px solid rgba(255,255,255,.3);
-    border-top:6px solid white;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
+#preloader.hide{
+
+opacity:0;
+visibility:hidden;
 
 }
 
 
-.loader-text{
 
-    margin-top:20px;
-    color:white;
-    font-size:22px;
-    font-weight:700;
+.loader-container{
+
+text-align:center;
+color:white;
+
+}
+
+
+
+.logo-loader{
+
+width:90px;
+height:90px;
+
+border-radius:50%;
+
+background:#F4B400;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+margin:auto;
+
+font-size:40px;
+
+animation:
+pulseLogo 2s infinite;
+
 }
 
 
-@keyframes spin{
 
-    100%{
-        transform:rotate(360deg);
-    }
+@keyframes pulseLogo{
+
+
+0%{
+
+transform:scale(1);
+
+box-shadow:
+0 0 0 0 rgba(244,180,0,.7);
 
 }
+
+
+50%{
+
+transform:scale(1.1);
+
+box-shadow:
+0 0 30px rgba(244,180,0,.8);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+
+
+.loader-container h2{
+
+margin-top:25px;
+
+font-size:28px;
+
+font-weight:800;
+
+}
+
+
+
+.loader-container h2 span{
+
+color:#F4B400;
+
+}
+
+
+
+.loader-container p{
+
+margin-top:10px;
+
+font-size:16px;
+
+opacity:.9;
+
+}
+
+
+
+.loading-bar{
+
+width:260px;
+
+height:8px;
+
+background:
+rgba(255,255,255,.3);
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:30px auto 15px;
+
+}
+
+
+
+.progress{
+
+height:100%;
+
+width:0%;
+
+background:#F4B400;
+
+border-radius:20px;
+
+transition:.2s;
+
+}
+
+
+
+.loading-text{
+
+font-size:15px;
+
+   }
+
 
 
 /* =========================
@@ -337,15 +470,42 @@ nav ul{
 <body>
 
 
-<!-- PRELOADER -->
+
+<!-- PROFESSIONAL PRELOADER -->
 
 <div id="preloader">
 
-<div class="loader"></div>
+    <div class="loader-container">
 
-<div class="loader-text">
-Pleasure 1 Aluminum Enterprise
-</div>
+        <div class="logo-loader">
+            <i class="fa-solid fa-building"></i>
+        </div>
+
+
+        <h2>
+            Pleasure 1 
+            <span>Aluminum Enterprise</span>
+        </h2>
+
+
+        <p>
+            Aluminium & Glass Solutions
+        </p>
+
+
+        <div class="loading-bar">
+
+            <div class="progress"></div>
+
+        </div>
+
+
+        <div class="loading-text">
+            Loading <span id="percent">0%</span>
+        </div>
+
+
+    </div>
 
 </div>
 
