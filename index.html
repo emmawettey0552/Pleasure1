@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pleasure 1 Aluminum Enterprise | Aluminium & Glass Solutions</title>
+
+<meta name="description" content="Pleasure 1 Aluminum Enterprise provides quality aluminium fabrication, sliding windows, glass doors and modern architectural solutions.">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:#f8f9fa;
+    color:#222;
+    overflow-x:hidden;
+}
+
+:root{
+    --primary:#5E2B97;
+    --secondary:#F4B400;
+    --dark:#222;
+    --light:#ffffff;
+}
+
+
+section{
+    padding:80px 8%;
+}
+
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+
+/* =========================
+   PRELOADER
+========================= */
+
+#preloader{
+
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#5E2B97,#32104f);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+
+}
+
+
+.loader{
+
+    width:65px;
+    height:65px;
+    border:6px solid rgba(255,255,255,.3);
+    border-top:6px solid white;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+
+}
+
+
+.loader-text{
+
+    margin-top:20px;
+    color:white;
+    font-size:22px;
+    font-weight:700;
+}
+
+
+@keyframes spin{
+
+    100%{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+header{
+
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    background:rgba(94,43,151,.95);
+    backdrop-filter:blur(10px);
+
+}
+
+
+.navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+
+}
+
+
+.logo{
+
+    color:white;
+    font-size:22px;
+    font-weight:800;
+
+}
+
+
+.logo span{
+
+    color:var(--secondary);
+
+}
+
+
+nav ul{
+
+    display:flex;
+    list-style:none;
+    gap:25px;
+
+}
+
+
+nav ul li a{
+
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+
+nav ul li a:hover{
+
+    color:var(--secondary);
+
+}
+
+
+.gallery-btn{
+
+    background:var(--secondary);
+    color:#222;
+    padding:12px 22px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+
+.hero{
+
+    height:650px;
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+.slide{
+
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:1.5s;
+
+}
+
+
+.slide.active{
+
+    opacity:1;
+
+}
+
+
+.slide img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+
+.overlay{
+
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        rgba(0,0,0,.5),
+        rgba(94,43,151,.7)
+    );
+
+}
+
+
+.hero-content{
+
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+    width:90%;
+
+}
+
+
+.hero-content h1{
+
+    font-size:45px;
+    margin-bottom:20px;
+
+}
+
+
+.hero-content p{
+
+    font-size:20px;
+    margin-bottom:30px;
+
+}
+
+
+.hero-buttons a{
+
+    display:inline-block;
+    margin:10px;
+    padding:15px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+.btn-primary{
+
+    background:var(--secondary);
+    color:#222;
+
+}
+
+
+.btn-outline{
+
+    border:2px solid white;
+    color:white;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:900px){
+
+.navbar{
+
+    flex-direction:column;
+    gap:15px;
+
+}
+
+
+nav ul{
+
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+
+
+.hero-content h1{
+
+    font-size:30px;
+
+}
+
+
+.hero-content p{
+
+    font-size:16px;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- PRELOADER -->
+
+<div id="preloader">
+
+<div class="loader"></div>
+
+<div class="loader-text">
+Pleasure 1 Aluminum Enterprise
+</div>
+
+</div>
+
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="navbar">
+
+
+<div class="logo">
+
+Pleasure 1 <span>Aluminium</span>
+
+</div>
+
+
+<nav>
+
+<ul>
+
+<li><a href="#home"><i class="fa fa-home"></i> Home</a></li>
+
+<li><a href="#about"><i class="fa fa-building"></i> About</a></li>
+
+<li><a href="#services"><i class="fa fa-tools"></i> Services</a></li>
+
+<li><a href="gallery.html"><i class="fa fa-images"></i> Gallery</a></li>
+
+<li><a href="#contact"><i class="fa fa-phone"></i> Contact</a></li>
+
+</ul>
+
+</nav>
+
+
+</div>
+
+</header>
+
+
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+
+<div class="slide active">
+
+<img src="IMG-20260425-WA0000.jpg">
+
+<div class="overlay"></div>
+
+</div>
+
+
+
+<div class="slide">
+
+<img src="Screenshot_20260503-194406_1.png">
+
+<div class="overlay"></div>
+
+</div>
+
+
+
+<div class="slide">
+
+<img src="IMG-20260503-WA0000.jpg">
+
+<div class="overlay"></div>
+
+</div>
+
+
+
+<div class="hero-content">
+
+
+<h1>
+Modern Aluminium & Glass Solutions
+</h1>
+
+
+<p>
+Strong • Elegant • Reliable Architectural Designs
+</p>
+
+
+<div class="hero-buttons">
+
+<a href="#contact" class="btn-primary">
+Get Free Quote
+</a>
+
+
+<a href="gallery.html" class="btn-outline">
+View Projects
+</a>
+
+
+</div>
+
+
+</div>
+
+
+  </section>
